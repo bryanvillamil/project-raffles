@@ -10,10 +10,8 @@ export default async function getNumbers(
 	try {
 		const data =
 			await sql`SELECT Numero from numeros_usados where Sorteo_id = ${raffle}`;
-
 		const dataRaffle =
 			await sql`SELECT cantidad_voletas from sorteos where Id = ${raffle}`;
-
 		const numbersAvailable = ListNumbers(
 			1,
 			dataRaffle.rows[0].cantidad_voletas,
