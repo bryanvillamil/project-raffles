@@ -3,6 +3,7 @@
     "kysely",
     "Kysely",
     "postgres",
+    "Swiper",
     "Wompi"
   ]
 }

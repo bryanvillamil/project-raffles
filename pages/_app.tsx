@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 // import { ApolloProvider } from "@apollo/client";
 // import client from "@client/index";
 import Head from 'next/head';
+import '@styles/reset.css';
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (

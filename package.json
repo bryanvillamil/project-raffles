@@ -22,9 +22,13 @@
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-slick": "^0.29.0",
+    "sass": "^1.67.0",
+    "slick-carousel": "^1.8.1",
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@types/crypto-js": "^4.1.2"
+    "@types/crypto-js": "^4.1.2",
+    "@types/react-slick": "^0.23.10"
   }
 }

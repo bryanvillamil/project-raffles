@@ -1,3 +1,5 @@
-export default function Home() {
-  return <div>Home</div>;
+import Home from '@/components/pages/home/home';
+
+export default function Index() {
+	return <Home />;
 }

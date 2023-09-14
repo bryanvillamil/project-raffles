@@ -15,7 +15,7 @@ export default async function callBack(
 		if (validTransaction(body)) {
 			await db
 				.updateTable('numeros_usados')
-				.set({ estado_transaccion: statusTransactionEnum.APPROVED })
+				.set({ estado_transaccion: body.data.transaction.status })
 				.where(
 					'numero_transaccion',
 					'=',
@@ -25,6 +25,6 @@ export default async function callBack(
 			res.status(200).json({ message: 'success' });
 		}
 	} catch (error) {
-		res.status(200).json({ message: 'Error save' });
+		res.status(500).json({ message: 'Error save' });
 	}
 }
