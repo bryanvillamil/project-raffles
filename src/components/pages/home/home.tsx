@@ -22,7 +22,6 @@ const Home = () => {
 		<Layout>
 			<Slider {...settings} className={styles.slider}>
 				<Image src={slide1} alt='slide1'></Image>
-
 				<Image src={slide2} alt='slide2'></Image>
 				<Image src={slide3} alt='slide3'></Image>
 			</Slider>
