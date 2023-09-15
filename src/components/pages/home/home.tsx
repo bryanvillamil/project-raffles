@@ -21,15 +21,10 @@ const Home = () => {
 	return (
 		<Layout>
 			<Slider {...settings} className={styles.slider}>
-				<div>
-					<Image src={slide1} alt='slide1'></Image>
-				</div>
-				<div>
-					<Image src={slide2} alt='slide2'></Image>
-				</div>
-				<div>
-					<Image src={slide3} alt='slide3'></Image>
-				</div>
+				<Image src={slide1} alt='slide1'></Image>
+
+				<Image src={slide2} alt='slide2'></Image>
+				<Image src={slide3} alt='slide3'></Image>
 			</Slider>
 
 			<ProgressBar progress={20}></ProgressBar>
