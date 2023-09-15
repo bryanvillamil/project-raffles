@@ -1,0 +1,16 @@
+@import '../../../../styles/global.scss';
+
+.progress_container {
+  width: 100%;
+  background-color: $color-blanco;
+  border-radius: 10px;
+}
+
+.progress {
+  text-align: center;
+  line-height: 30px;
+  color: $color-blanco;
+  background-color: $color-verde-manzana;
+  width: 0;
+  border-radius: 10px;
+}
