@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 				<div className={styles.header_logo}>
 					<Link href='/'>
 						<Image
-							src={img}
+							src={img} // Tomar logo de contentful
 							alt='Logo'
 							width={506}
 							height={145}></Image>
@@ -24,14 +24,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 			<footer className={styles.footer}>
 				<div className={styles.footer_container}>
 					<a
-						href='#'
+						href='#' // Tomar link de contentful
 						rel='noopener noreferrer'
 						target='_blank'
 						className={styles.button_social}>
 						<Image src={facebook} alt='icon-facebook'></Image>
 					</a>
 					<a
-						href='#'
+						href='#' // Tomar link de contentful
 						rel='noopener noreferrer'
 						target='_blank'
 						className={styles.button_social}>

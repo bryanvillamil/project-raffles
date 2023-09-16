@@ -1,5 +1,12 @@
 @import '../../../../styles/global.scss';
 
+.container {
+  &>small {
+    color: $color-gris-claro;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
 .progress_container {
   width: 100%;
   background-color: $color-blanco;
@@ -13,4 +20,5 @@
   background-color: $color-verde-manzana;
   width: 0;
   border-radius: 10px;
+  content: "";
 }

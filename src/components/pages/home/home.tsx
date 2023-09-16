@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './home.module.scss';
 import Image from 'next/image';
 import slide1 from '@/assets/slide-1.svg';
@@ -9,8 +9,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Layout from '@/components/templates/layout/layout';
 import ProgressBar from '@/components/atoms/progressBar/progressBar';
+import API from '@/services/API';
+import { Ticket } from '@/components/atoms/ticket/ticket';
 
 const Home = () => {
+	const idRaffle = 1;
+	const [percent, setPercent] = useState(0);
 	const settings = {
 		dots: true,
 		infinite: true,
@@ -18,15 +22,82 @@ const Home = () => {
 		slidesToShow: 1,
 		slidesToScroll: 1,
 	};
+
+	const getNumbers = async (cantNumbers: number) => {
+		const Api = new API('/api');
+		await Api.post<{ percentSold: number }>('getNumbersAvailable', {
+			raffle: idRaffle, // tomar el sorteo id de contentful
+			cant: cantNumbers, // tomar el sorteo id de contentful
+		}).then(result => {
+			console.log(
+				'💩 ~ file: home.tsx:31 ~ getNumbers ~ result:',
+				result,
+			);
+		});
+	};
+
+	useEffect(() => {
+		const respuesta = async () => {
+			const Api = new API('/api');
+			await Api.post<{ percentSold: number }>('getPercentRaffle', {
+				sorteo_id: idRaffle, // tomar el sorteo id de contentful
+			}).then(result => {
+				setPercent(result.percentSold);
+			});
+		};
+		respuesta();
+	}, []);
+
+	// Tomar las img del contentful
 	return (
 		<Layout>
-			<Slider {...settings} className={styles.slider}>
-				<Image src={slide1} alt='slide1'></Image>
-				<Image src={slide2} alt='slide2'></Image>
-				<Image src={slide3} alt='slide3'></Image>
-			</Slider>
+			<div className={styles.container}>
+				<Slider {...settings} className={styles.slider}>
+					<Image src={slide1} alt='slide1'></Image>
+					<Image src={slide2} alt='slide2'></Image>
+					<Image src={slide3} alt='slide3'></Image>
+				</Slider>
 
-			<ProgressBar progress={20}></ProgressBar>
+				<div className={styles.info_raffle}>
+					<h2>Nombre Articulo o Actividad</h2>
+					<ProgressBar progress={percent}></ProgressBar>
+					<h3>
+						Valor de cada boleta <b>COP $5.000</b>
+					</h3>
+
+					<p>
+						El sorteo se realizara por la l0teria de medellin cuando
+						se alcance el 100% de la meta{' '}
+					</p>
+				</div>
+			</div>
+
+			<div className={styles.seller}>
+				<h2>Compra tus números</h2>
+				<div className={styles.container_tickets}>
+					<Ticket
+						onClick={() => {
+							getNumbers(2);
+						}}
+						value='$10.000'
+						label='2 Números'
+					/>
+					<Ticket
+						onClick={() => {
+							getNumbers(5);
+						}}
+						value='$25.000'
+						label='5 Números'
+					/>
+					<Ticket
+						onClick={() => {
+							getNumbers(10);
+						}}
+						value='$50.000'
+						label='10 Números'
+					/>
+				</div>
+			</div>
 		</Layout>
 	);
 };

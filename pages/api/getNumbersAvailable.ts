@@ -22,8 +22,13 @@ export default async function getNumbers(
 			.selectFrom('numeros_usados')
 			.select('numero')
 			.where('sorteo_id', '=', raffle)
-			.where('estado_transaccion', '=', statusTransactionEnum.PENDING)
-			.where('estado_transaccion', '=', statusTransactionEnum.APPROVED)
+			.where(eb =>
+				eb('estado_transaccion', '=', statusTransactionEnum.PENDING).or(
+					'estado_transaccion',
+					'=',
+					statusTransactionEnum.APPROVED,
+				),
+			)
 			.execute();
 		const dataRaffle = await db
 			.selectFrom('sorteos')
@@ -39,6 +44,6 @@ export default async function getNumbers(
 
 		res.status(200).json(encrypt(numbersAvailable));
 	} catch (error) {
-		res.status(500).json({ message: 'Error list numbers' });
+		res.status(500).json(encrypt({ message: 'Error list numbers' }));
 	}
 }

@@ -19,7 +19,6 @@ export default async function handler(
 			.selectAll()
 			.where('sorteo_id', '=', body.sorteo_id)
 			.where('estado_transaccion', '=', statusTransactionEnum.APPROVED)
-			.where('estado_transaccion', '=', statusTransactionEnum.PENDING)
 			.execute();
 		let raffle = await db
 			.selectFrom('sorteos')

@@ -1,0 +1,74 @@
+@import '../../../../styles/global.scss';
+
+.ticket {
+  height: 120px;
+  position: relative;
+  width: 200px;
+  background: linear-gradient(335deg, $color-naranja-brillante, $color-naranja-complementario);
+  // border: 10px dotted $color-azul-oscuro;
+
+  &:before {
+    top: -20px;
+    left: -20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    content: "";
+    position: absolute;
+    background-color: $color-azul-oscuro;
+
+
+  }
+
+  &:after {
+    top: -20px;
+    right: -20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    content: "";
+    position: absolute;
+    background-color: $color-azul-oscuro;
+  }
+
+  &_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px solid $color-gris-claro;
+    border-radius: 20px;
+    padding: 5px 0;
+
+    &>span {
+      font-size: x-large;
+      font-weight: 700;
+      font-family: 'Work Sans', sans-serif;
+      color: $color-azul-oscuro;
+    }
+
+
+    &:before {
+      bottom: -20px;
+      left: -20px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      content: "";
+      position: absolute;
+      background-color: $color-azul-oscuro;
+
+
+    }
+
+    &:after {
+      bottom: -20px;
+      right: -20px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      content: "";
+      position: absolute;
+      background-color: $color-azul-oscuro;
+    }
+  }
+}

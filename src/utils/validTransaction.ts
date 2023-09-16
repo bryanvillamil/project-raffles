@@ -1,4 +1,5 @@
 import { IEventWompi } from '@/types/evenType';
+import CryptoJS from 'crypto-js';
 
 export const validTransaction = (event: IEventWompi) => {
 	if (event.signature.properties.length === 3) {

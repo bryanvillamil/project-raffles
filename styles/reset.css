@@ -45,7 +45,8 @@ h3,
 h4,
 h5,
 h6 {
-	font-weight: normal;
+	font-weight: bold;
+	font-family: 'Work Sans', sans-serif;
 }
 
 /* Estilos por defecto para enlaces */
@@ -62,6 +63,7 @@ input[type='reset'] {
 	background: none;
 	cursor: pointer;
 	outline: none;
+	font-family: 'Poppins', sans-serif;
 }
 
 /* Evitar estilos predeterminados de formularios */
@@ -72,6 +74,7 @@ textarea {
 	padding: 0;
 	border: none;
 	font: inherit;
+	font-family: 'Poppins', sans-serif;
 }
 
 /* Evitar estilos predeterminados de elementos de formulario en Firefox */
@@ -79,6 +82,7 @@ input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
+	font-family: 'Poppins', sans-serif;
 }
 
 /* Estilos para formularios */
@@ -90,6 +94,7 @@ textarea {
 	border-radius: 4px;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
 }
 
 /* Estilos de botón */
@@ -99,6 +104,8 @@ button {
 	background-color: #007bff; /* Puedes cambiar el color según tus preferencias */
 	color: #fff;
 	cursor: pointer;
+	font-family: 'Work Sans', sans-serif;
+
 }
 
 .slick-dots li.slick-active button:before {
