@@ -20,6 +20,9 @@ import Button from '@/components/atoms/button/button';
 const Home = () => {
 	const idRaffle = 1;
 	const [percent, setPercent] = useState(0);
+	const [numbers, setNumbers] = useState<number[]>();
+	console.log('💩 ~ file: home.tsx:24 ~ Home ~ numbers:', numbers);
+
 	const { setLoading } = useModal();
 	const { setStore } = useStore();
 	const settings = {
@@ -33,12 +36,13 @@ const Home = () => {
 	const getNumbers = async (cantNumbers: number) => {
 		setLoading(true);
 		const Api = new API('/api');
-		await Api.post<{ percentSold: number }>('getNumbersAvailable', {
+		await Api.post<number[]>('getNumbersAvailable', {
 			raffle: idRaffle, // tomar el sorteo id de contentful
 			cant: cantNumbers, // tomar el sorteo id de contentful
 		})
 			.then(result => {
 				setStore(result, nameStore.NUMBERS);
+				setNumbers(result);
 			})
 			.finally(() => {
 				setLoading(false);
@@ -78,6 +82,18 @@ const Home = () => {
 						El sorteo se realizara por la l0teria de medellin cuando
 						se alcance el 100% de la meta{' '}
 					</p>
+					<ul className={styles.info_raffle_list}>
+						<li>especificación</li>
+						<li>especificación</li>
+						<li>especificación</li>
+						<li>especificación</li>
+						<li>especificación</li>
+						<li>especificación</li>
+						<li>especificación</li>
+						<li>especificación</li>
+						<li>especificación</li>
+						<li>especificación</li>
+					</ul>
 				</div>
 			</div>
 
@@ -106,7 +122,12 @@ const Home = () => {
 						label='10 Números'
 					/>
 				</div>
-				<Button type='Link' label='Ir a pagar' url='/chequeout' />
+				<Button
+					type='Link'
+					label='Ir a pagar'
+					url='/chequeout'
+					disable={numbers && numbers.length > 0}
+				/>
 			</div>
 		</Layout>
 	);

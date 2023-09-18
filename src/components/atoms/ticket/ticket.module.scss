@@ -5,7 +5,12 @@
   position: relative;
   width: 200px;
   background: linear-gradient(335deg, $color-naranja-brillante, $color-naranja-complementario);
-  // border: 10px dotted $color-azul-oscuro;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    scale: 1.1;
+    transition: all 0.2s ease-in-out;
+  }
 
   &:before {
     top: -20px;

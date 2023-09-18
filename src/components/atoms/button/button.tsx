@@ -17,11 +17,21 @@ const Button = ({ type, url, label, onClick, disable }: TypeButton) => {
 				<button
 					onClick={onClick}
 					className={styles.button}
-					disabled={disable}>
+					disabled={!disable}>
 					{label}
 				</button>
 			);
 		case 'Link':
+			if (!disable) {
+				return (
+					<button
+						onClick={onClick}
+						className={styles.button}
+						disabled={!disable}>
+						{label}
+					</button>
+				);
+			}
 			return (
 				<Link href={url ?? ''} className={styles.button}>
 					{label}
