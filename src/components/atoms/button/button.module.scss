@@ -1,0 +1,13 @@
+@import '../../../../styles/global.scss';
+
+.button {
+  // background-color: $color-naranja-brillante;
+
+  background: linear-gradient(335deg, $color-naranja-brillante, $color-naranja-complementario);
+  color: $color-blanco;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: large;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}

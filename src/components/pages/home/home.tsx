@@ -11,10 +11,17 @@ import Layout from '@/components/templates/layout/layout';
 import ProgressBar from '@/components/atoms/progressBar/progressBar';
 import API from '@/services/API';
 import { Ticket } from '@/components/atoms/ticket/ticket';
+import { useModal } from '@/hook/useLoading';
+import Link from 'next/link';
+import { useStore } from '@/hook/useStore';
+import { nameStore } from '@/enum/nameStore';
+import Button from '@/components/atoms/button/button';
 
 const Home = () => {
 	const idRaffle = 1;
 	const [percent, setPercent] = useState(0);
+	const { setLoading } = useModal();
+	const { setStore } = useStore();
 	const settings = {
 		dots: true,
 		infinite: true,
@@ -24,16 +31,18 @@ const Home = () => {
 	};
 
 	const getNumbers = async (cantNumbers: number) => {
+		setLoading(true);
 		const Api = new API('/api');
 		await Api.post<{ percentSold: number }>('getNumbersAvailable', {
 			raffle: idRaffle, // tomar el sorteo id de contentful
 			cant: cantNumbers, // tomar el sorteo id de contentful
-		}).then(result => {
-			console.log(
-				'💩 ~ file: home.tsx:31 ~ getNumbers ~ result:',
-				result,
-			);
-		});
+		})
+			.then(result => {
+				setStore(result, nameStore.NUMBERS);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 	};
 
 	useEffect(() => {
@@ -97,6 +106,7 @@ const Home = () => {
 						label='10 Números'
 					/>
 				</div>
+				<Button type='Link' label='Ir a pagar' url='/chequeout' />
 			</div>
 		</Layout>
 	);

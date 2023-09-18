@@ -5,8 +5,11 @@ import Link from 'next/link';
 import img from '@/assets/logo.svg';
 import facebook from '@/assets/facebook.svg';
 import instagram from '@/assets/instagram.svg';
+import { useModal } from '@/hook/useLoading';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+	const { loading } = useModal();
+
 	return (
 		<div className={styles.container_principal}>
 			<header className={styles.header}>
@@ -39,6 +42,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 					</a>
 				</div>
 			</footer>
+			{loading && (
+				<div className={styles.loading}>
+					<div></div>
+				</div>
+			)}
 		</div>
 	);
 };

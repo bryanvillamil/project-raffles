@@ -3,10 +3,11 @@ import type { AppProps } from 'next/app';
 // import client from "@client/index";
 import Head from 'next/head';
 import '@styles/reset.css';
+import { ModalProvider } from '@/hook/useLoading';
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<>
+		<ModalProvider>
 			<Head>
 				<meta
 					name='viewport'
@@ -17,6 +18,6 @@ export default function App({ Component, pageProps }: AppProps) {
 			{/* <ApolloProvider client={client}> */}
 			<Component {...pageProps} />
 			{/* </ApolloProvider> */}
-		</>
+		</ModalProvider>
 	);
 }

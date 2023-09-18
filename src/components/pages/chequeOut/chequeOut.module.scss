@@ -40,3 +40,26 @@
   }
 
 }
+
+.cart_numbers {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+
+  margin-top: 10px;
+}
+
+.num {
+  padding: 2px 4px;
+  background: $color-naranja-brillante;
+  color: $color-blanco;
+  font-family: 'Poppins', sans-serif;
+  font-size: medium;
+  border-radius: 5px;
+}
+
+.chequeOut_footer{
+  width: 100%;
+  margin-top: 30px;
+}

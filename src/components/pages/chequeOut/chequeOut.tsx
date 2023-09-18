@@ -1,7 +1,19 @@
 import Layout from '@/components/templates/layout/layout';
 import styles from './chequeOut.module.scss';
+import { useStore } from '@/hook/useStore';
+import { useState, useEffect } from 'react';
+import { nameStore } from '@/enum/nameStore';
+import Button from '@/components/atoms/button/button';
+import { useRouter } from 'next/router';
 
 export const ChequeOut = () => {
+	const { getStore, deleteStore } = useStore();
+	const [numbers, setNumbers] = useState<number[]>();
+	const router = useRouter();
+	useEffect(() => {
+		setNumbers(getStore(nameStore.NUMBERS));
+	}, []);
+
 	return (
 		<Layout>
 			<h1>Detalles de pago</h1>
@@ -47,9 +59,28 @@ export const ChequeOut = () => {
 
 				<div className={styles.column}>
 					<div className={styles.cart}>
-						<h3>resumen de pago</h3>
+						<h2>resumen de pago</h2>
+						<div className={styles.cart_numbers}>
+							{numbers?.map(num => (
+								<span
+									className={styles.num}
+									key={'number' + num}>
+									{num}
+								</span>
+							))}
+						</div>
 					</div>
 				</div>
+			</div>
+			<div className={styles.chequeOut_footer}>
+				<Button
+					type='Button'
+					label='Cancelar'
+					onClick={() => {
+						deleteStore();
+						router.push('/');
+					}}
+				/>
 			</div>
 		</Layout>
 	);
