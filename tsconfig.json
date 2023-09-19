@@ -24,6 +24,8 @@
       "@components/*": ["src/components/*"],
       "@styles/*": ["styles/*"],
       "@client/*": ["client/*"],
+      "@queries/*": ["src/queries/*"],
+      "@services/*": ["src/services/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "declaration.d.ts"],
