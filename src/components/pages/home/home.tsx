@@ -21,7 +21,6 @@ const Home = () => {
 	const idRaffle = 1;
 	const [percent, setPercent] = useState(0);
 	const [numbers, setNumbers] = useState<number[]>();
-	console.log('💩 ~ file: home.tsx:24 ~ Home ~ numbers:', numbers);
 
 	const { setLoading } = useModal();
 	const { setStore } = useStore();
@@ -126,7 +125,8 @@ const Home = () => {
 					type='Link'
 					label='Ir a pagar'
 					url='/chequeout'
-					disable={numbers && numbers.length > 0}
+					disable={!(numbers && numbers.length > 0)}
+					typeButton={'button'}
 				/>
 			</div>
 		</Layout>

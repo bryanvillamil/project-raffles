@@ -4,20 +4,29 @@ import Link from 'next/link';
 
 interface TypeButton {
 	type: 'Link' | 'Button';
+	typeButton: 'reset' | 'button' | 'submit';
 	url?: string;
 	label?: string;
 	onClick?: () => void;
 	disable?: boolean;
 }
 
-const Button = ({ type, url, label, onClick, disable }: TypeButton) => {
+const Button = ({
+	type,
+	url,
+	label,
+	onClick,
+	disable,
+	typeButton,
+}: TypeButton) => {
 	switch (type) {
 		case 'Button':
 			return (
 				<button
+					type={typeButton}
 					onClick={onClick}
 					className={styles.button}
-					disabled={!disable}>
+					disabled={disable}>
 					{label}
 				</button>
 			);
@@ -25,9 +34,10 @@ const Button = ({ type, url, label, onClick, disable }: TypeButton) => {
 			if (!disable) {
 				return (
 					<button
+						type={typeButton}
 						onClick={onClick}
 						className={styles.button}
-						disabled={!disable}>
+						disabled={disable}>
 						{label}
 					</button>
 				);

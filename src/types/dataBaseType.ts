@@ -4,6 +4,7 @@ export interface ICliente {
 	nombres: string;
 	cedula: string;
 	celular: string;
+	email: string;
 }
 
 // Interface para la tabla de Sorteos
@@ -38,7 +39,6 @@ export interface INumberAndPerson {
 	client: ICliente;
 	sorteo_id: number;
 	numero_transaccion: string;
-
 }
 
 export interface IDataBase {

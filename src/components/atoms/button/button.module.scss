@@ -18,5 +18,9 @@
   &:disabled{
     background: rgba($color: $color-naranja-complementario, $alpha: 0.8);
     cursor:not-allowed;
+
+    &:hover{
+      scale: 1;
+    }
   }
 }

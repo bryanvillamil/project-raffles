@@ -36,10 +36,38 @@
   &>form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+    padding-top: 30px;
+
+    &>input {
+      padding: 5px 10px;
+      font-family: 'Poppins', sans-serif;
+      outline: none;
+      border: none;
+      border-bottom: 3px solid $color-azul-oscuro;
+      border-radius: 0px;
+      transition: border-color 0.3s;
+
+      &:focus {
+        border-color: $color-verde-manzana;
+        animation: borderAnimation 1.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+      }
+    }
   }
 
 }
+
+@keyframes borderAnimation {
+  0% {
+    border-color: $color-azul-oscuro;
+  }
+
+  100% {
+    border-color: $color-verde-manzana;
+  }
+}
+
+
 
 .cart_numbers {
   width: 100%;
@@ -59,7 +87,7 @@
   border-radius: 5px;
 }
 
-.chequeOut_footer{
+.chequeOut_footer {
   width: 100%;
   margin-top: 30px;
 }

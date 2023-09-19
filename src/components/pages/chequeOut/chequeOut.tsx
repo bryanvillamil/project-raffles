@@ -7,9 +7,21 @@ import Button from '@/components/atoms/button/button';
 import { useRouter } from 'next/router';
 
 export const ChequeOut = () => {
-	const { getStore, deleteStore } = useStore();
 	const [numbers, setNumbers] = useState<number[]>();
+	const [name, setName] = useState('');
+	const [docId, setDocId] = useState('');
+	const [email, setEmail] = useState('');
+	const [tel, setTel] = useState('');
+
+	const handleChange =
+		(setState: (param: string) => void) => (event: any) => {
+			setState(event.target.value);
+		};
+
+	const { getStore, deleteStore } = useStore();
+
 	const router = useRouter();
+
 	useEffect(() => {
 		setNumbers(getStore(nameStore.NUMBERS));
 	}, []);
@@ -19,41 +31,58 @@ export const ChequeOut = () => {
 			<h1>Detalles de pago</h1>
 			<div className={styles.chequeOut_container}>
 				<div className={styles.column}>
-					<h3>Datos de contacto</h3>
-					<form>
-						<div>
-							{/* <label htmlFor='name'>Nombres</label> */}
-							<input
-								type='text'
-								id='name'
-								placeholder='Nombres'
-							/>
-						</div>
-						<div>
-							{/* <label htmlFor='document'>Cedula</label> */}
-							<input
-								type='text'
-								id='document'
-								placeholder='Cedula'
-							/>
-						</div>
-						<div>
-							{/* <label htmlFor='phone'>Numero de celular</label> */}
-							<input
-								type='text'
-								id='phone'
-								placeholder='Numero de celular'
-							/>
-						</div>
-						<div>
-							{/* <label htmlFor='phone'>Numero de celular</label> */}
-							<input
-								type='email'
-								id='phone'
-								placeholder='Correo electronic'
-							/>
-						</div>
-						<button>guardar</button>
+					<h2>Datos de contacto</h2>
+					<form onChange={() => {}}>
+						<input
+							type='text'
+							id='name'
+							placeholder='Nombres'
+							value={name}
+							maxLength={100}
+							minLength={1}
+							pattern="[a-z]"
+							required
+							onChange={event => {
+								handleChange(setName)(event);
+							}}
+						/>
+						<input
+							type='text'
+							id='document'
+							value={docId}
+							pattern={'[/d]'}
+							maxLength={11}
+							minLength={5}
+							required
+							placeholder='Cedula'
+							onChange={event => {
+								handleChange(setDocId)(event);
+							}}
+						/>
+						<input
+							type='text'
+							id='phone'
+							value={tel}
+							pattern={'[/d]'}
+							maxLength={10}
+							required
+							minLength={10}
+							placeholder='Número de celular'
+							onChange={event => {
+								handleChange(setTel)(event);
+							}}
+						/>
+						<input
+							type='email'
+							id='phone'
+							value={email}
+							maxLength={100}
+							placeholder='Correo electrónico'
+							onChange={event => {
+								handleChange(setEmail)(event);
+							}}
+						/>
+						<Button type='Button' label='Continuar' typeButton='submit' />
 					</form>
 				</div>
 
@@ -75,6 +104,7 @@ export const ChequeOut = () => {
 			<div className={styles.chequeOut_footer}>
 				<Button
 					type='Button'
+					typeButton='button'
 					label='Cancelar'
 					onClick={() => {
 						deleteStore();
