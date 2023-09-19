@@ -16,16 +16,17 @@ import Link from 'next/link';
 import { useStore } from '@/hook/useStore';
 import { nameStore } from '@/enum/nameStore';
 import Button from '@/components/atoms/button/button';
+import { useRouter } from 'next/router';
 
 const Home = () => {
 	const idRaffle = 1;
 	const [percent, setPercent] = useState(0);
-	const [numbers, setNumbers] = useState<number[]>();
 
+	const router = useRouter();
 	const { setLoading } = useModal();
 	const { setStore } = useStore();
 	const settings = {
-		dots: true,
+		// dots: true,
 		infinite: true,
 		speed: 500,
 		slidesToShow: 1,
@@ -41,7 +42,7 @@ const Home = () => {
 		})
 			.then(result => {
 				setStore(result, nameStore.NUMBERS);
-				setNumbers(result);
+				router.push('/finalizar-compra');
 			})
 			.finally(() => {
 				setLoading(false);
@@ -64,6 +65,7 @@ const Home = () => {
 	return (
 		<Layout>
 			<div className={styles.container}>
+				<h1>Nombre Actividad</h1>
 				<Slider {...settings} className={styles.slider}>
 					<Image src={slide1} alt='slide1'></Image>
 					<Image src={slide2} alt='slide2'></Image>
@@ -71,7 +73,6 @@ const Home = () => {
 				</Slider>
 
 				<div className={styles.info_raffle}>
-					<h2>Nombre Articulo o Actividad</h2>
 					<ProgressBar progress={percent}></ProgressBar>
 					<h3>
 						Valor de cada boleta <b>COP $5.000</b>
@@ -98,6 +99,7 @@ const Home = () => {
 
 			<div className={styles.seller}>
 				<h2>Compra tus números</h2>
+				<p>Selecciona cuantos números quiere comprar</p>
 				<div className={styles.container_tickets}>
 					<Ticket
 						onClick={() => {
@@ -107,6 +109,7 @@ const Home = () => {
 						label='2 Números'
 					/>
 					<Ticket
+						recommended
 						onClick={() => {
 							getNumbers(5);
 						}}
@@ -121,13 +124,6 @@ const Home = () => {
 						label='10 Números'
 					/>
 				</div>
-				<Button
-					type='Link'
-					label='Ir a pagar'
-					url='/chequeout'
-					disable={!(numbers && numbers.length > 0)}
-					typeButton={'button'}
-				/>
 			</div>
 		</Layout>
 	);

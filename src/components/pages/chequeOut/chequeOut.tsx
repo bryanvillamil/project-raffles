@@ -28,10 +28,12 @@ export const ChequeOut = () => {
 
 	return (
 		<Layout>
-			<h1>Detalles de pago</h1>
+			<div className={styles.chequeOut_header}>
+				<h1>Finalizar compra</h1>
+			</div>
 			<div className={styles.chequeOut_container}>
 				<div className={styles.column}>
-					<h2>Datos de contacto</h2>
+					<h2>Detalles de facturación</h2>
 					<form onChange={() => {}}>
 						<input
 							type='text'
@@ -40,7 +42,7 @@ export const ChequeOut = () => {
 							value={name}
 							maxLength={100}
 							minLength={1}
-							pattern="[a-z]"
+							pattern='[a-z]'
 							required
 							onChange={event => {
 								handleChange(setName)(event);
@@ -82,21 +84,37 @@ export const ChequeOut = () => {
 								handleChange(setEmail)(event);
 							}}
 						/>
-						<Button type='Button' label='Continuar' typeButton='submit' />
 					</form>
 				</div>
 
 				<div className={styles.column}>
 					<div className={styles.cart}>
-						<h2>resumen de pago</h2>
-						<div className={styles.cart_numbers}>
-							{numbers?.map(num => (
-								<span
-									className={styles.num}
-									key={'number' + num}>
-									{num}
-								</span>
-							))}
+						<h2>Tu pedido</h2>
+						<div className={styles.card_container}>
+							<div className={styles.card_container_data}>
+								<div className={styles.data}>
+									<p>Nombre Actividad × 21</p>
+									<p>$252,000</p>
+								</div>
+								<div className={styles.data}>
+									<p>Subtotal</p>
+									<p>$252,000</p>
+								</div>
+								<div className={styles.data}>
+									<p>Total</p>
+									<p>$252,000</p>
+								</div>
+							</div>
+							<p>Tus números</p>
+							<div className={styles.cart_numbers}>
+								{numbers?.map(num => (
+									<span
+										className={styles.num}
+										key={'number' + num}>
+										{num}
+									</span>
+								))}
+							</div>
 						</div>
 					</div>
 				</div>
