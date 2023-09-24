@@ -58,9 +58,12 @@ const StatusTransaction = () => {
 								? styles.card_status_header_success
 								: styles.card_status_header_error
 						}`}>
-						<p>!Pago exitoso¡</p> {/* Success */}
-						{/* <p>!Error a la hora del pago¡</p> */}
-						{/* Error de pago */}
+						{dataTransaction?.data.status ===
+						statusTransactionEnum.APPROVED ? (
+							<p>!Pago exitoso¡</p>
+						) : (
+							<p>!Error a la hora del pago¡</p>
+						)}
 					</div>
 					<div
 						className={`${styles.card_status_body} ${styles.card_status_bo}`}>
@@ -98,7 +101,9 @@ const StatusTransaction = () => {
 											<div>
 												{JSON.parse(numberAssigned).map(
 													(num: number) => (
-														<span>{num}</span>
+														<span key={'key' + num}>
+															{num}
+														</span>
 													),
 												)}
 											</div>
