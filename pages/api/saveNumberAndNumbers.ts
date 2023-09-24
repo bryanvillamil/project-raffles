@@ -1,6 +1,5 @@
 import { statusTransactionEnum } from '@/enum/statusTransactioEnum';
 import {
-	ICliente,
 	IDataBase,
 	INumberAndPerson,
 	INumeroUsado,
@@ -17,18 +16,6 @@ export default async function getNumbers(
 	const body = decrypt(req.body) as INumberAndPerson;
 	const db = createKysely<IDataBase>();
 	try {
-		let numbers = await db
-			.selectFrom('numeros_usados')
-			.select('numero')
-			.where('sorteo_id', '=', body.sorteo_id)
-			.execute();
-		if (numbers.length > 0) {
-			res.status(500).json(
-				encrypt({ error: 'Números asignados ya fueron usado' }),
-			);
-			return;
-		}
-
 		let data = await db
 			.selectFrom('clientes')
 			.select(['id'])
@@ -43,18 +30,17 @@ export default async function getNumbers(
 				.where('cedula', '=', body.client.cedula)
 				.execute();
 		}
-
-		const numberUsed: INumeroUsado[] = body.numbers.map(num => {
-			return {
-				numero: num,
-				cliente_id: data[0].id,
+		await db
+			.insertInto('numeros_usados')
+			.values({
+				cliente_id: data[0].id ?? 0,
 				sorteo_id: body.sorteo_id,
 				estado_transaccion: statusTransactionEnum.PENDING,
 				fecha_compra: new Date(),
 				numero_transaccion: body.numero_transaccion,
-			};
-		});
-		await db.insertInto('numeros_usados').values(numberUsed).execute();
+				cantidad: body.cantidad,
+			})
+			.execute();
 
 		res.status(200).json(encrypt({ message: 'success save' }));
 	} catch (error) {

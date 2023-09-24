@@ -9,7 +9,8 @@ export const cipher = () => {
 
 		return cipherText;
 	};
-	const decrypt = (data: string | string): object => {
+
+	const decrypt = (data: string): object => {
 		const bytes = CryptoJS.AES.decrypt(
 			data,
 			process.env.NEXT_PUBLIC_API_KEY ?? '',
@@ -19,5 +20,11 @@ export const cipher = () => {
 		return obj;
 	};
 
-	return { encrypt, decrypt };
+	const encryptName = (name: string) => {
+		const cipherText = CryptoJS.SHA256(name).toString();
+
+		return cipherText;
+	};
+
+	return { encrypt, decrypt, encryptName };
 };

@@ -8,6 +8,8 @@ export const GET_DATA_HOME = gql`
         title
       }
       marca 
+      precio
+      idSorteo
       imagenesCollection {
         items {
           ... on ImagenesDeRifa {

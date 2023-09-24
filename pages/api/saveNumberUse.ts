@@ -16,12 +16,12 @@ export default async function getNumbers(
 	try {
 		const numberUsed: INumeroUsado[] = body.numero.map(num => {
 			return {
-				numero: num,
 				estado_transaccion: statusTransactionEnum.PENDING,
 				fecha_compra: new Date(),
 				numero_transaccion: body.numero_transaccion,
 				cliente_id: body.cliente_id,
 				sorteo_id: body.sorteo_id,
+				cantidad: body.cantidad,
 			};
 		});
 		await db.insertInto('numeros_usados').values(numberUsed).execute();

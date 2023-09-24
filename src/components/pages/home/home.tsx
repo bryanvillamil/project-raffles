@@ -12,21 +12,23 @@ import ProgressBar from '@/components/atoms/progressBar/progressBar';
 import API from '@/services/API';
 import { Ticket } from '@/components/atoms/ticket/ticket';
 import { useModal } from '@/hook/useLoading';
-import Link from 'next/link';
 import { useStore } from '@/hook/useStore';
 import { nameStore } from '@/enum/nameStore';
-import Button from '@/components/atoms/button/button';
 import { useRouter } from 'next/router';
+import { convertToMoney } from '@/utils/convertToMoney';
 
-const Home = () => {
-	const idRaffle = 1;
+const Home = ({
+	homeRifas: { marca, precio, idSorteo },
+}: {
+	homeRifas: { marca: string; precio: number; idSorteo: string };
+}) => {
 	const [percent, setPercent] = useState(0);
 
 	const router = useRouter();
 	const { setLoading } = useModal();
 	const { setStore } = useStore();
+
 	const settings = {
-		// dots: true,
 		infinite: true,
 		speed: 500,
 		slidesToShow: 1,
@@ -35,37 +37,38 @@ const Home = () => {
 
 	const getNumbers = async (cantNumbers: number) => {
 		setLoading(true);
-		const Api = new API('/api');
-		await Api.post<number[]>('getNumbersAvailable', {
-			raffle: idRaffle, // tomar el sorteo id de contentful
-			cant: cantNumbers, // tomar el sorteo id de contentful
-		})
-			.then(result => {
-				setStore(result, nameStore.NUMBERS);
-				router.push('/finalizar-compra');
-			})
-			.finally(() => {
-				setLoading(false);
-			});
+		// const Api = new API('/api');
+		// await Api.post<number[]>('getNumbersAvailable', {
+		// 	raffle: idSorteo, // tomar el sorteo id de contentful
+		// 	cant: cantNumbers, // tomar el sorteo id de contentful
+		// })
+		// 	.then(result => {
+		setStore(cantNumbers, nameStore.NUMBERS, true);
+		router.push('/finalizar-compra');
+		// })
+		// .finally(() => {
+		setLoading(false);
+		// });
 	};
 
 	useEffect(() => {
 		const respuesta = async () => {
 			const Api = new API('/api');
 			await Api.post<{ percentSold: number }>('getPercentRaffle', {
-				sorteo_id: idRaffle, // tomar el sorteo id de contentful
+				sorteo_id: idSorteo, // tomar el sorteo id de contentful
 			}).then(result => {
 				setPercent(result.percentSold);
 			});
 		};
 		respuesta();
+		setStore({ marca, precio, idSorteo }, nameStore.DATA_RIFA, true);
 	}, []);
 
 	// Tomar las img del contentful
 	return (
 		<Layout>
 			<div className={styles.container}>
-				<h1>Nombre Actividad</h1>
+				<h1 className={styles.container_name_activity}>{marca}</h1>
 				<Slider {...settings} className={styles.slider}>
 					<Image src={slide1} alt='slide1'></Image>
 					<Image src={slide2} alt='slide2'></Image>
@@ -75,25 +78,13 @@ const Home = () => {
 				<div className={styles.info_raffle}>
 					<ProgressBar progress={percent}></ProgressBar>
 					<h3>
-						Valor de cada boleta <b>COP $5.000</b>
+						Valor de cada boleta <b>COP {convertToMoney(precio)}</b>
 					</h3>
 
 					<p>
 						El sorteo se realizara por la l0teria de medellin cuando
 						se alcance el 100% de la meta{' '}
 					</p>
-					<ul className={styles.info_raffle_list}>
-						<li>especificación</li>
-						<li>especificación</li>
-						<li>especificación</li>
-						<li>especificación</li>
-						<li>especificación</li>
-						<li>especificación</li>
-						<li>especificación</li>
-						<li>especificación</li>
-						<li>especificación</li>
-						<li>especificación</li>
-					</ul>
 				</div>
 			</div>
 
@@ -105,7 +96,7 @@ const Home = () => {
 						onClick={() => {
 							getNumbers(2);
 						}}
-						value='$10.000'
+						value={convertToMoney(precio * 2)}
 						label='2 Números'
 					/>
 					<Ticket
@@ -113,14 +104,14 @@ const Home = () => {
 						onClick={() => {
 							getNumbers(5);
 						}}
-						value='$25.000'
+						value={convertToMoney(precio * 5)}
 						label='5 Números'
 					/>
 					<Ticket
 						onClick={() => {
 							getNumbers(10);
 						}}
-						value='$50.000'
+						value={convertToMoney(precio * 10)}
 						label='10 Números'
 					/>
 				</div>

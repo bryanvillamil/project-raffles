@@ -1,6 +1,6 @@
 // Interface para la tabla de Clientes
 export interface ICliente {
-	id: number;
+	id?: number;
 	nombres: string;
 	cedula: string;
 	celular: string;
@@ -18,12 +18,13 @@ export interface ISorteo {
 // Interface para la tabla de NumerosUsados
 export interface INumeroUsado {
 	id?: number;
-	numero: number;
+	numero?: string;
 	numero_transaccion: string;
 	estado_transaccion: string;
 	fecha_compra: Date;
 	cliente_id: number;
 	sorteo_id: number;
+	cantidad: number;
 }
 
 export interface INumeroUsadoApi {
@@ -32,13 +33,15 @@ export interface INumeroUsadoApi {
 	cliente_id: number;
 	sorteo_id: number;
 	numero_transaccion: string;
+	cantidad: number
 }
 
 export interface INumberAndPerson {
-	numbers: number[];
+	// numbers: number[];
 	client: ICliente;
 	sorteo_id: number;
 	numero_transaccion: string;
+	cantidad: number;
 }
 
 export interface IDataBase {

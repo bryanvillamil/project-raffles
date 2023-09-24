@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import styles from './button.module.scss';
 import Link from 'next/link';
 
@@ -7,7 +7,7 @@ interface TypeButton {
 	typeButton: 'reset' | 'button' | 'submit';
 	url?: string;
 	label?: string;
-	onClick?: () => void;
+	onClick?: (event: any) => void;
 	disable?: boolean;
 }
 

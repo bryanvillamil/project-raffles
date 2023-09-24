@@ -35,10 +35,20 @@ export default async function getNumbers(
 			.select('cantidad_voletas')
 			.where('id', '=', raffle)
 			.execute();
+
+		const valueOmit: Array<number> = [];
+		data.forEach(item => {
+			if (item.numero) {
+				const numbers: number[] = JSON.parse(item.numero ?? '');
+				numbers.forEach(num => {
+					valueOmit.push(num);
+				});
+			}
+		});
 		const numbersAvailable = ListNumbers(
 			1,
 			dataRaffle[0].cantidad_voletas,
-			data.map(num => num.numero),
+			valueOmit,
 			cant,
 		);
 

@@ -1,0 +1,99 @@
+@import '../../../../styles/global.scss';
+
+.container {
+  width: 100%;
+  max-width: 1080px;
+  min-width: $mobile;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+
+  &>.goBack {
+    width: 100px;
+    text-decoration: none;
+    color: $color-blanco;
+    font-family: 'Work Sans', sans-serif;
+  }
+
+
+}
+
+.card_status {
+  width: 40%;
+  height: 400px;
+  background: $color-blanco;
+  border-radius: 20px;
+
+  &_header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    border-bottom: 1px solid $color-azul-oscuro;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+    &_success {
+      background: $color-verde-manzana;
+    }
+
+    &_error {
+      background: $color-rojo-error;
+    }
+
+    &>p {
+      font-family: 'Poppins', sans-serif;
+      font-size: medium;
+      color: $color-blanco;
+    }
+  }
+
+  &_body {
+    padding: 10px;
+    color: $color-azul-oscuro;
+    font-family: 'Poppins', sans-serif;
+
+
+    .table {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      &_title {
+        background: $color-gris-claro;
+        width: 100%;
+        padding: 10px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        font-family: 'Work Sans', sans-serif;
+      }
+
+      &_data {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        &_item {
+          border-bottom: 1px solid $color-gris-claro;
+          padding: 5px 10px;
+          display: flex;
+          justify-content: space-between;
+
+          & > div {
+            display: flex;
+            gap: 4px;
+            
+            &> span{
+              padding: 5px;
+              font-weight: bold;
+              border: 1px solid $color-verde-manzana;
+            }
+          }
+        }
+      }
+    }
+  }
+}

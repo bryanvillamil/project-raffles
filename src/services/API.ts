@@ -14,6 +14,12 @@ class API {
 		return data as T;
 	}
 
+	async getOut<T>(endpoint: string): Promise<T> {
+		const response = await fetch(`${this.baseURL}/${endpoint}`);
+		const data = await response.json();
+		return data as T;
+	}
+
 	async post<T>(endpoint: string, body: any): Promise<T> {
 		const { encrypt, decrypt } = cipher();
 		const response = await fetch(`${this.baseURL}/${endpoint}`, {

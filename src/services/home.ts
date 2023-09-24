@@ -13,5 +13,5 @@ export const getDataHome = async () => {
 
   console.log('datadata', data);
   
-  return null
+  return data
 }
