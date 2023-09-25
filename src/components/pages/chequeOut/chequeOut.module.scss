@@ -15,6 +15,7 @@
   max-width: 1080px;
   min-width: $mobile;
   display: flex;
+  flex-direction: column;
   border-bottom: 1px solid $color-blanco;
   padding-bottom: 10px;
   margin-bottom: 20px;

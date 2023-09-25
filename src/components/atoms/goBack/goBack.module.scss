@@ -1,0 +1,14 @@
+@import '../../../../styles/global.scss';
+
+.goBack {
+	align-self: flex-start;
+	text-decoration: none;
+	color: $color-blanco;
+	font-family: 'Work Sans', sans-serif;
+	text-shadow: 2px 2px 5px #000;
+
+	&:hover {
+		scale: 1.02;
+		text-shadow: 3px 3px 6px #000;
+	}
+}

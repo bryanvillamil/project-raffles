@@ -11,6 +11,7 @@ import API from '@/services/API';
 import { INumberAndPerson } from '@/types/dataBaseType';
 import { useModal } from '@/hook/useLoading';
 import { convertToMoney } from '@/utils/convertToMoney';
+import GoBack from '@/components/atoms/goBack/goBack';
 
 export const ChequeOut = () => {
 	const [numbers, setNumbers] = useState<number>(0);
@@ -135,6 +136,7 @@ export const ChequeOut = () => {
 	return (
 		<Layout>
 			<div className={styles.chequeOut_header}>
+				<GoBack></GoBack>
 				<h1>Finalizar compra</h1>
 			</div>
 			<div className={styles.chequeOut_container}>

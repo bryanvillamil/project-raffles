@@ -5,6 +5,8 @@ import { IDataTransactionID } from '@/types/ITransactionID';
 import { INumeroUsado } from '@/types/dataBaseType';
 import React, { useEffect, useState } from 'react';
 import styles from './statusTransaction.module.scss';
+import Link from 'next/link';
+import GoBack from '@/components/atoms/goBack/goBack';
 
 const StatusTransaction = () => {
 	const [dataTransaction, setDataTransaction] =
@@ -16,11 +18,6 @@ const StatusTransaction = () => {
 		await api
 			.post<INumeroUsado>('getNumbers', { idTransaction: id })
 			.then(result => {
-				console.log(result);
-				console.log(
-					'💩 ~ file: StatusTransaction.tsx:25 ~ StatusTransaction ~ JSON.parse(numberAssigned):',
-					JSON.parse(numberAssigned ?? ''),
-				);
 				setNumberAssigned(result.numero);
 			});
 	};
@@ -47,9 +44,10 @@ const StatusTransaction = () => {
 	return (
 		<Layout>
 			<div className={styles.container}>
-				<a href='/' className={styles.goBack}>
-					{'<-'} go back{' '}
-				</a>
+				{/* <Link href='/' className={styles.goBack}>
+					{'<'} Volver al inicio{' '}
+				</Link> */}
+				<GoBack></GoBack>
 				<div className={styles.card_status}>
 					<div
 						className={`${styles.card_status_header} ${
@@ -61,8 +59,14 @@ const StatusTransaction = () => {
 						{dataTransaction?.data.status ===
 						statusTransactionEnum.APPROVED ? (
 							<p>!Pago exitoso¡</p>
+						) : dataTransaction?.data.status ===
+						  statusTransactionEnum.DECLINED ? (
+							<p>!Su pago fue declinado¡</p>
 						) : (
-							<p>!Error a la hora del pago¡</p>
+							dataTransaction?.data.status ===
+								statusTransactionEnum.ERROR && (
+								<p>!Su pago fue declinado¡</p>
+							)
 						)}
 					</div>
 					<div
@@ -88,7 +92,19 @@ const StatusTransaction = () => {
 									</div>
 									<div className={styles.table_data_item}>
 										<p>Tu transacción ha sido</p>{' '}
-										<b>aprobada</b>
+										<b>
+											{dataTransaction?.data.status ===
+											statusTransactionEnum.APPROVED
+												? 'Aprobada'
+												: dataTransaction?.data
+														.status ===
+												  statusTransactionEnum.DECLINED
+												? 'Rechazado'
+												: dataTransaction?.data
+														.status ===
+														statusTransactionEnum.ERROR &&
+												  'Errado'}
+										</b>
 									</div>
 									<div className={styles.table_data_item}>
 										<p>Tu número de compra es</p>
@@ -113,6 +129,7 @@ const StatusTransaction = () => {
 							</div>
 						</div>
 					</div>
+					GgoG
 				</div>
 			</div>
 			{/* <div className={styles.title}>
