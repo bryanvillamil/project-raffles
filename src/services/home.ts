@@ -6,12 +6,13 @@ export const getDataHome = async () => {
     query: GET_DATA_HOME
   });
 
-  // const { home } = data ?? {}
-  // const { proyectosCollection } = home ?? {}
-  // const items: any[] = proyectosCollection?.items ?? []
-  // const dataItems: IPropsProject[] = items ?? []
+  const queryImagesSort = data?.homeRifas?.imagenesCollection?.items;
 
-  console.log('datadata', data);
-  
-  return data
+  return {
+    marca: data?.homeRifas?.marca,
+    precio: data?.homeRifas?.precio,
+    idSorteo: data?.homeRifas?.idSorteo,
+    logo: data?.homeRifas?.logo,
+    imagenes : queryImagesSort
+  }
 }
