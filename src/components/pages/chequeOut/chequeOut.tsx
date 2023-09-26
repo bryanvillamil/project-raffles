@@ -12,8 +12,9 @@ import { INumberAndPerson } from '@/types/dataBaseType';
 import { useModal } from '@/hook/useLoading';
 import { convertToMoney } from '@/utils/convertToMoney';
 import GoBack from '@/components/atoms/goBack/goBack';
+import { IPropsHome } from '@/types/home';
 
-export const ChequeOut = () => {
+export const ChequeOut = (props: IPropsHome) => {
 	const [numbers, setNumbers] = useState<number>(0);
 	const [name, setName] = useState('');
 	const [docId, setDocId] = useState('');
@@ -134,7 +135,7 @@ export const ChequeOut = () => {
 	}, []);
 
 	return (
-		<Layout>
+		<Layout logo={props.logo}>
 			<div className={styles.chequeOut_header}>
 				<GoBack></GoBack>
 				<h1>Finalizar compra</h1>

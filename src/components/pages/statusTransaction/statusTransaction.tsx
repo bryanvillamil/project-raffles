@@ -7,8 +7,9 @@ import React, { useEffect, useState } from 'react';
 import styles from './statusTransaction.module.scss';
 import Link from 'next/link';
 import GoBack from '@/components/atoms/goBack/goBack';
+import { IPropsHome } from '@/types/home';
 
-const StatusTransaction = () => {
+const StatusTransaction = (props: IPropsHome) => {
 	const [dataTransaction, setDataTransaction] =
 		useState<IDataTransactionID>();
 
@@ -42,7 +43,7 @@ const StatusTransaction = () => {
 	}, []);
 
 	return (
-		<Layout>
+		<Layout logo={props.logo}>
 			<div className={styles.container}>
 				{/* <Link href='/' className={styles.goBack}>
 					{'<'} Volver al inicio{' '}
