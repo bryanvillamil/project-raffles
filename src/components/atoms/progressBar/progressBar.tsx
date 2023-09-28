@@ -9,7 +9,7 @@ const ProgressBar = ({ progress }: { progress: number }) => {
 				<div
 					className={styles.progress}
 					style={{ width: `${progress}%` }}>
-					{progress}%
+					{Math.trunc(progress)}%
 				</div>
 			</div>
 		</div>

@@ -20,6 +20,17 @@ export default async function handler(
 			.where('sorteo_id', '=', body.sorteo_id)
 			.where('estado_transaccion', '=', statusTransactionEnum.APPROVED)
 			.execute();
+
+		const numbersUsed: Array<number> = [];
+		numbers.forEach(item => {
+			if (item.numero) {
+				const numbers: number[] = JSON.parse(item.numero ?? '');
+				numbers.forEach(num => {
+					numbersUsed.push(num);
+				});
+			}
+		});
+
 		let raffle = await db
 			.selectFrom('sorteos')
 			.select('cantidad_voletas')
@@ -29,7 +40,7 @@ export default async function handler(
 			encrypt({
 				percentSold: calculatePercent(
 					raffle[0].cantidad_voletas,
-					numbers.length,
+					numbersUsed.length,
 				),
 			}),
 		);

@@ -14,11 +14,31 @@ const StatusTransaction = (props: IPropsHome) => {
 		useState<IDataTransactionID>();
 
 	const [numberAssigned, setNumberAssigned] = useState<string>();
-	const getDataTransaction = async (id: string) => {
+
+	const saveNumbers = async (id: string, status: statusTransactionEnum) => {
+		const api = new API('/api');
+		await api
+			.post<INumeroUsado>('saveNumberUse', {
+				numero_transaccion: id,
+				estado_transaccion: status,
+			})
+			.then(result => {
+				getDataTransaction(id, status);
+			});
+	};
+
+	const getDataTransaction = async (
+		id: string,
+		status: statusTransactionEnum,
+	) => {
 		const api = new API('/api');
 		await api
 			.post<INumeroUsado>('getNumbers', { idTransaction: id })
 			.then(result => {
+				if (result.numero === null) {
+					saveNumbers(result.numero_transaccion, status);
+					return;
+				}
 				setNumberAssigned(result.numero);
 			});
 	};
@@ -33,7 +53,10 @@ const StatusTransaction = (props: IPropsHome) => {
 				setDataTransaction(result);
 
 				if (result.data.status === statusTransactionEnum.APPROVED) {
-					await getDataTransaction(result.data.reference);
+					await getDataTransaction(
+						result.data.reference,
+						result.data.status,
+					);
 				}
 			});
 	};
@@ -45,9 +68,6 @@ const StatusTransaction = (props: IPropsHome) => {
 	return (
 		<Layout logo={props.logo}>
 			<div className={styles.container}>
-				{/* <Link href='/' className={styles.goBack}>
-					{'<'} Volver al inicio{' '}
-				</Link> */}
 				<GoBack></GoBack>
 				<div className={styles.card_status}>
 					<div
