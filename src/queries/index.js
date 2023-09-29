@@ -10,6 +10,8 @@ export const GET_DATA_HOME = gql`
       marca 
       precio
       idSorteo
+      facebook
+  		instagram
       imagenesCollection {
         items {
           ... on ImagenesDeRifa {
