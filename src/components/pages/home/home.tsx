@@ -91,7 +91,7 @@ const Home = ({
   return (
     <Layout logo={logo} facebook={facebook} instagram={instagram}>
       <div className={styles.container}>
-        <h1 className={styles.container_name_activity}>{marca}</h1>
+        {/* <h2 className={styles.container_name_activity}>{marca}</h2> */}
 
         <div className={styles.boxAward}>
           <Slider {...settings} className={styles.slider}>

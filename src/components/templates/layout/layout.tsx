@@ -27,9 +27,11 @@ const Layout = ({
     <div className={styles.container_principal}>
       <header className={styles.header}>
         <div className={styles.header_logo}>
-          <Link href="/">
-            <Image src={logo.url} alt={logo.title} width={150} height={130} />
-          </Link>
+          <h1>
+            <Link href="/">
+              <Image src={logo.url} alt={logo.title} width={150} height={130} />
+            </Link>
+          </h1>
         </div>
       </header>
       <main className={styles.container}>{children}</main>
