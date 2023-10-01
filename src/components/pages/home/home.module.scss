@@ -11,11 +11,27 @@
   gap: 15px;
 
   &_name_activity {
-    font-size: 70px;
+    font-size: 40px;
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
     text-shadow: 2px 2px 5px #000;
+    text-align: center;
   }
+
+  @media (min-width: $tablet ) {
+    &_name_activity {
+      font-size: 70px;
+    }
+  }
+}
+
+.boxAward {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 98%;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 
 .slider {
@@ -25,14 +41,21 @@
   height: 100%;
   margin: 10px;
   img {
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center;
     width: 100%;
     // height: 100%;
+  }
+  @media (min-width: $tablet ) {
+    width: 48%;
+  }
+  @media (min-width: $laptop ) {
+    width: 55%;
   }
 }
 
 .seller {
-  margin-top: 30px;
+  margin-top: 50px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -40,17 +63,15 @@
 
 .info_raffle {
   width: 100%;
-  min-width: $mobile;
-  max-width: 1000px;
+  max-width: 580px;
   border-radius: 20px;
   padding: 15px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 4px;
 
-  &>h3 {
+  & > h3 {
     font-family: 'Poppins', sans-serif;
 
     &>b {
@@ -61,8 +82,9 @@
     }
   }
 
-  &>p {
+  & > p {
     font-family: 'Work Sans', sans-serif;
+    text-shadow: 1px 1px 3px #000;
   }
 
   &_list {
@@ -74,15 +96,22 @@
       line-height: 20px;
     }
   }
-
+  @media (min-width: $tablet ) {
+    width: 48%;
+  }
+  @media (min-width: $laptop ) {
+    width: 42%;
+  }
 }
 
 .container_tickets {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 30px;
   margin-bottom: 45px;
 
   @media (min-width:$tablet ) {

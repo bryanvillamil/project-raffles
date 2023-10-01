@@ -14,6 +14,8 @@ export interface IAward {
 
 export interface IPropsHome {
 	marca: string;
+	facebook: string;
+	instagram: string;
   precio: number;
   idSorteo: string;
   logo: ILogo;

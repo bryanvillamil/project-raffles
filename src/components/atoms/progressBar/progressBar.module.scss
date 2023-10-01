@@ -3,6 +3,7 @@
 .container {
   &>small {
     color: $color-gris-claro;
+    display: block;
     font-family: 'Poppins', sans-serif;
   }
 }
@@ -10,15 +11,25 @@
 .progress_container {
   width: 100%;
   background-color: $color-blanco;
-  border-radius: 10px;
+  border-radius: 12px;
+  height: 25px;
+}
+
+.progressText {
+  margin: 10px 0 8px;
+  display: flex;
 }
 
 .progress {
   text-align: center;
-  line-height: 30px;
+  height: 100%;
   color: $color-blanco;
   background-color: $color-verde-manzana;
   width: 0;
-  border-radius: 10px;
+  border-radius: 12px;
+  padding: 0 3px;
+  font-size: 12px;
+  color: #333;
+  font-weight: 800;
   content: "";
 }

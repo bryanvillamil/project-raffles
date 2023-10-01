@@ -18,7 +18,15 @@ import { useRouter } from "next/router";
 import { convertToMoney } from "@/utils/convertToMoney";
 import { IPropsHome } from "@/types/home";
 
-const Home = ({ marca, precio, idSorteo, logo, imagenes }: IPropsHome) => {
+const Home = ({
+  marca,
+  precio,
+  idSorteo,
+  logo,
+  imagenes,
+  facebook,
+  instagram,
+}: IPropsHome) => {
   const [percent, setPercent] = useState(0);
 
   const router = useRouter();
@@ -30,6 +38,24 @@ const Home = ({ marca, precio, idSorteo, logo, imagenes }: IPropsHome) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 480,
+        settings: {
+          dots: false,
+          arrows: false,
+          infinite: true,
+          autoplay: true,
+          fade: true,
+        },
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          arrows: false,
+        },
+      },
+    ],
   };
 
   const getNumbers = async (cantNumbers: number) => {
@@ -63,38 +89,41 @@ const Home = ({ marca, precio, idSorteo, logo, imagenes }: IPropsHome) => {
 
   // Tomar las img del contentful
   return (
-    <Layout logo={logo}>
+    <Layout logo={logo} facebook={facebook} instagram={instagram}>
       <div className={styles.container}>
-        <h1 className={styles.container_name_activity}>{marca}</h1>
-        <Slider {...settings} className={styles.slider}>
-          {imagenes.map((e, i) => {
-            return (
-              <Image
-                key={i}
-                src={e.imagenPremio.url}
-                alt={e.titulo}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                }}
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33.3vw"
-                width={1800}
-                height={500}
-              />
-            );
-          })}
-        </Slider>
+        {/* <h2 className={styles.container_name_activity}>{marca}</h2> */}
 
-        <div className={styles.info_raffle}>
-          <ProgressBar progress={percent}></ProgressBar>
-          <h3>
-            Valor de cada boleta <b>COP {convertToMoney(precio)}</b>
-          </h3>
+        <div className={styles.boxAward}>
+          <Slider {...settings} className={styles.slider}>
+            {imagenes.map((e, i) => {
+              return (
+                <Image
+                  key={i}
+                  src={e.imagenPremio.url}
+                  alt={e.titulo}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33.3vw"
+                  width={1800}
+                  height={500}
+                />
+              );
+            })}
+          </Slider>
 
-          <p>
-            El sorteo se realizara por la l0teria de medellin cuando se alcance
-            el 100% de la meta{" "}
-          </p>
+          <div className={styles.info_raffle}>
+            <ProgressBar progress={percent}></ProgressBar>
+            <h3>
+              Valor de cada boleta <b>COP {convertToMoney(precio)}</b>
+            </h3>
+
+            <p>
+              El sorteo se realizara por la loteria de medellin cuando se
+              alcance el 100% de la meta{" "}
+            </p>
+          </div>
         </div>
       </div>
 

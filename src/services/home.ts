@@ -13,6 +13,8 @@ export const getDataHome = async () => {
     precio: data?.homeRifas?.precio,
     idSorteo: data?.homeRifas?.idSorteo,
     logo: data?.homeRifas?.logo,
+    facebook: data?.homeRifas?.facebook,
+    instagram: data?.homeRifas?.instagram,
     imagenes : queryImagesSort
   }
 }

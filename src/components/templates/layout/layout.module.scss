@@ -31,12 +31,13 @@
 
 .header {
   width: 100%;
-  height: 100%;
+  height: 85px;
   padding: 12px 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $color-verde-manzana;
+  // background-color: $color-verde-manzana;
+  background: #fff;
   &_logo {
     a {
       height: 100%;
@@ -44,6 +45,19 @@
       img {
         object-fit: contain;
         object-position: center;
+        height: 80px;
+      }
+    }
+  }
+
+  @media (min-width: $tablet ) {
+    height: 100%;
+    &_logo {
+      a {
+        img {
+          width: 150px;
+          height: 130px;
+        }
       }
     }
   }
@@ -51,26 +65,70 @@
 
 .footer {
   width: 100%;
-  height: 120px;
+  height: auto;
   background-color: $color-blanco;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 30px;
+  &_info {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: 2;
+    margin-top: 25px;
+    p {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      span {
+        margin-left: 4px;
+      }
+    }
+  }
 
   &_container {
+    order: 1;
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 10px 25px;
 
     .button_social {
       width: 35px;
       height: 35px;
-      border-radius: 50%;
-      background-color: $color-naranja-brillante;
+      border-radius: 5px;
       display: flex;
       justify-content: center;
       align-items: center;
       justify-items: center;
+      overflow: hidden;
+      transition: all 0.5s ease-in-out;
+      img {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+      }
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  @media (min-width: $tablet ) {
+    &_info {
+      width: 45%;
+      justify-content: flex-start;
+      margin-top: 0; 
+      order: 1;
+    }
+
+    &_container {
+      width: 55%;
+      order: 2;
+      justify-content: flex-end;
     }
   }
 }
