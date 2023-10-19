@@ -2,7 +2,6 @@ import { ChequeOut } from '@/components/pages/chequeOut/chequeOut';
 import { getDataHome } from '@/services/home';
 import { IPropsHome } from '@/types/home';
 import { GetStaticProps } from 'next';
-import React from 'react';
 
 const index = (props: IPropsHome) => {
 	return <ChequeOut {...props} />;

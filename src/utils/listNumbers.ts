@@ -6,7 +6,8 @@ export default function ListNumbers(
 ): number[] {
 	const numbersAvailable: number[] = [];
 	for (let i = x; i <= y; i++) {
-		if (!omitir.includes(i)) {
+		const paddedNumber = i.toString().padStart(4, '0');
+		if (paddedNumber.length === 4 && !omitir.includes(i)) {
 			numbersAvailable.push(i);
 		}
 	}

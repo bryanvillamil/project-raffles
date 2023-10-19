@@ -79,7 +79,6 @@ export default async function callBack(
 					valueOmit,
 					dataTransaction[0].cantidad,
 				);
-				console.log(numbersAvailable);
 
 				if (
 					body.data.transaction.status !==

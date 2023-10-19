@@ -10,15 +10,7 @@ export const createIntegrityKey = async ({
 	SecretoIntegridad: string;
 }) => {
 	const concatIntegrity = Referencia + Monto + Moneda + SecretoIntegridad;
-	console.log(
-		'💩 ~ file: createIntegrity.ts:13 ~ concatIntegrity:',
-		concatIntegrity,
-	);
 
-	// const concatIntegrityEncrypt = CryptoJS.SHA256(concatIntegrity);
-	// return concatIntegrityEncrypt;
-
-	//Ejemplo
 	const encondedText = new TextEncoder().encode(concatIntegrity);
 	const hashBuffer = await crypto.subtle.digest('SHA-256', encondedText);
 	const hashArray = Array.from(new Uint8Array(hashBuffer));

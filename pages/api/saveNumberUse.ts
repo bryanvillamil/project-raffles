@@ -1,5 +1,5 @@
 import { statusTransactionEnum } from '@/enum/statusTransactioEnum';
-import { IDataBase, INumeroUsado, INumeroUsadoApi } from '@/types/dataBaseType';
+import { IDataBase, INumeroUsado } from '@/types/dataBaseType';
 import { cipher } from '@/utils/encrypt';
 import ListNumbers from '@/utils/listNumbers';
 import { createKysely } from '@vercel/postgres-kysely';

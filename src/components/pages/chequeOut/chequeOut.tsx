@@ -1,18 +1,18 @@
-import Layout from '@/components/templates/layout/layout';
-import styles from './chequeOut.module.scss';
-import { useStore } from '@/hook/useStore';
-import { useState, useEffect, useRef } from 'react';
-import { nameStore } from '@/enum/nameStore';
 import Button from '@/components/atoms/button/button';
-import { useRouter } from 'next/router';
-import { createReferences } from '@/utils/createReferences';
-import { createIntegrityKey } from '@/utils/createIntegrity';
+import GoBack from '@/components/atoms/goBack/goBack';
+import Layout from '@/components/templates/layout/layout';
+import { nameStore } from '@/enum/nameStore';
+import { useModal } from '@/hook/useLoading';
+import { useStore } from '@/hook/useStore';
 import API from '@/services/API';
 import { INumberAndPerson } from '@/types/dataBaseType';
-import { useModal } from '@/hook/useLoading';
-import { convertToMoney } from '@/utils/convertToMoney';
-import GoBack from '@/components/atoms/goBack/goBack';
 import { IPropsHome } from '@/types/home';
+import { convertToMoney } from '@/utils/convertToMoney';
+import { createIntegrityKey } from '@/utils/createIntegrity';
+import { createReferences } from '@/utils/createReferences';
+import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
+import styles from './chequeOut.module.scss';
 
 export const ChequeOut = (props: IPropsHome) => {
 	const [numbers, setNumbers] = useState<number>(0);

@@ -40,15 +40,18 @@
   min-width: $mobile;
   height: 100%;
   margin: 10px;
+
   img {
     object-fit: cover;
     object-position: center;
     width: 100%;
     // height: 100%;
   }
+
   @media (min-width: $tablet ) {
     width: 48%;
   }
+
   @media (min-width: $laptop ) {
     width: 55%;
   }
@@ -71,7 +74,7 @@
   justify-content: center;
   gap: 4px;
 
-  & > h3 {
+  &>h3 {
     font-family: 'Poppins', sans-serif;
 
     &>b {
@@ -82,7 +85,7 @@
     }
   }
 
-  & > p {
+  &>p {
     font-family: 'Work Sans', sans-serif;
     text-shadow: 1px 1px 3px #000;
   }
@@ -96,9 +99,11 @@
       line-height: 20px;
     }
   }
+
   @media (min-width: $tablet ) {
     width: 48%;
   }
+
   @media (min-width: $laptop ) {
     width: 42%;
   }
@@ -116,5 +121,72 @@
 
   @media (min-width:$tablet ) {
     flex-direction: row;
+  }
+}
+
+.selectNumber {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding-top: 20px;
+  }
+
+  &_container_number {
+    padding: 15px;
+    background-color: $color-blanco;
+    border-radius: 10px;
+    color: $color-azul-oscuro !important;
+
+    .number {
+      padding: 2px 5px;
+      font-weight: bold;
+      border: 1px solid $color-verde-manzana;
+      border-radius: 5px;
+    }
+  }
+
+  &_container_form {
+    padding: 15px;
+    background-color: $color-blanco;
+    border-radius: 10px;
+    color: $color-azul-oscuro !important;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      &>div {
+
+        &>small {
+          color: $color-naranja-brillante;
+          font-family: 'Work Sans', sans-serif;
+          padding: 0px 10px;
+        }
+
+        input {
+          padding: 5px 10px;
+          font-family: 'Poppins', sans-serif;
+          outline: none;
+          border: none;
+          border-bottom: 2px solid $color-azul-oscuro;
+          border-radius: 0px;
+          transition: border-color 0.3s;
+
+          &:focus {
+            border-color: $color-verde-manzana;
+            animation: borderAnimation 1.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+          }
+        }
+      }
+    }
   }
 }
