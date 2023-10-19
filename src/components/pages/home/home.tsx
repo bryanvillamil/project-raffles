@@ -28,6 +28,8 @@ const Home = ({
 	const [percent, setPercent] = useState(0);
 	const [loadingValidNumber, setLoadingValidNumber] = useState(false);
 	const [isValidNumber, setIsValidNumber] = useState(false);
+	const [validNumberMessage, setValidNumberMessage] = useState('');
+	const [numbersSelected, setNumbersSelected] = useState<number[]>([]);
 	const router = useRouter();
 	const { setLoading } = useModal();
 	const { setStore } = useStore();
@@ -60,17 +62,25 @@ const Home = ({
 	const validNumber = (event: any) => {
 		setLoadingValidNumber(true);
 		setIsValidNumber(false);
+		const numberToValid = event.target.numberToValid.value;
 		event.preventDefault();
 		const Api = new API('/api');
 		Api.post<{ response: boolean }>('validNumber', {
-			number: event.target.numberToValid.value, // tomar el sorteo id de contentful
+			number: numberToValid,
 		}).then(result => {
-			console.log(
-				'💩 ~ file: home.tsx:68 ~ validNumber ~ result:',
-				result,
-			);
-
-			setIsValidNumber(result.response);
+			if (numbersSelected.includes(numberToValid) === false) {
+				setNumbersSelected([...numbersSelected, numberToValid]);
+				if (!result.response) {
+					setValidNumberMessage('El número ya fue seleccionado');
+				} else {
+					setValidNumberMessage('');
+				}
+				setIsValidNumber(result.response);
+				event.target.numberToValid.value = '';
+			} else {
+				setIsValidNumber(result.response);
+				setValidNumberMessage('El número ya fue seleccionado');
+			}
 			setLoadingValidNumber(false);
 		});
 	};
@@ -86,7 +96,7 @@ const Home = ({
 		const respuesta = async () => {
 			const Api = new API('/api');
 			await Api.post<{ percentSold: number }>('getPercentRaffle', {
-				sorteo_id: idSorteo, // tomar el sorteo id de contentful
+				sorteo_id: idSorteo,
 			}).then(result => {
 				setPercent(result.percentSold);
 			});
@@ -190,7 +200,7 @@ const Home = ({
 								) : (
 									<>
 										{isValidNumber && (
-											<p>El número ya fue comprado</p>
+											<p>{validNumberMessage}</p>
 										)}
 									</>
 								)}
@@ -201,7 +211,11 @@ const Home = ({
 					<div className={styles.selectNumber_container_number}>
 						<p>Números seleccionados</p>
 						<div className={styles.numbers}>
-							<span className={styles.number}>1234</span>
+							{numbersSelected?.map(number => (
+								<span className={styles.number} key={number}>
+									{number}
+								</span>
+							))}
 						</div>
 					</div>
 				</div>
