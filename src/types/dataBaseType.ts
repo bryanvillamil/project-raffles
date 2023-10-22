@@ -33,11 +33,11 @@ export interface INumeroUsadoApi {
 	cliente_id: number;
 	sorteo_id: number;
 	numero_transaccion: string;
-	cantidad: number
+	cantidad: number;
 }
 
 export interface INumberAndPerson {
-	// numbers: number[];
+	numbers?: number[];
 	client: ICliente;
 	sorteo_id: number;
 	numero_transaccion: string;

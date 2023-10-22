@@ -1,6 +1,5 @@
-import React, { MouseEventHandler } from 'react';
-import styles from './button.module.scss';
 import Link from 'next/link';
+import styles from './button.module.scss';
 
 interface TypeButton {
 	type: 'Link' | 'Button';
@@ -37,7 +36,7 @@ const Button = ({
 						type={typeButton}
 						onClick={onClick}
 						className={styles.button}
-						disabled={disable}>
+						disabled>
 						{label}
 					</button>
 				);

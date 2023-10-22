@@ -16,6 +16,7 @@ import styles from './chequeOut.module.scss';
 
 export const ChequeOut = (props: IPropsHome) => {
 	const [numbers, setNumbers] = useState<number>(0);
+	const [numbersSelected, setNumbersSelected] = useState<number[]>();
 	const [name, setName] = useState('');
 	const [docId, setDocId] = useState('');
 	const [email, setEmail] = useState('');
@@ -39,7 +40,21 @@ export const ChequeOut = (props: IPropsHome) => {
 	const router = useRouter();
 	const signData = async (ref: string) => {
 		const data = getStore(nameStore.DATA_RIFA, true);
-		const nums = getStore(nameStore.NUMBERS, true);
+		let nums = getStore(nameStore.NUMBERS, true);
+		const numbers_selected = getStore(nameStore.NUMBERS_SELECTED, true);
+		console.log(
+			'💩 ~ file: chequeOut.tsx:45 ~ signData ~ numbers_selected:',
+			numbers_selected,
+		);
+
+		if (numbers_selected !== null) {
+			nums = numbers_selected.length;
+			let parsedNumbers: number[] = (numbers_selected as string[]).map(
+				num => Number(num),
+			);
+			setNumbersSelected(parsedNumbers);
+		}
+
 		setDataRifa(data);
 		setNumbers(nums);
 		const sign = await createIntegrityKey({
@@ -69,7 +84,7 @@ export const ChequeOut = (props: IPropsHome) => {
 			);
 		}
 
-		if (type === 'num' && !/^[0-9]+$/.test(value)) {
+		if (type === 'num' && !/^[/\d/]+$/.test(value)) {
 			return 'Solo puede agregar números';
 		}
 
@@ -99,6 +114,7 @@ export const ChequeOut = (props: IPropsHome) => {
 			sorteo_id: Number(dataRifa?.idSorteo ?? '0'),
 			numero_transaccion: reference,
 			cantidad: numbers ?? 0,
+			numbers: numbersSelected,
 		};
 
 		const Api = new API('/api');

@@ -12,6 +12,7 @@ export default async function validNumber(
 	const body = decrypt(req.body) as { number: string };
 	const db = createKysely<IDataBase>();
 	try {
+		let response = true;
 		const dataToOmit = await db
 			.selectFrom('numeros_usados')
 			.select('numero')
@@ -23,14 +24,20 @@ export default async function validNumber(
 				),
 			)
 			.execute();
+		dataToOmit.forEach(item => {});
 
-		dataToOmit.forEach(item => {
-			if (item.numero === body.number) {
-				return res.status(200).json(encrypt({ response: false }));
+		for (const element of dataToOmit) {
+			const item = element;
+			let numbers = JSON.parse(item.numero ?? '');
+			if (numbers.includes(Number(body.number))) {
+				// return res.status(200).json(encrypt({ response: false }));
+				response = false;
+				// return;
+				break;
 			}
-		});
+		}
 
-		res.status(200).json(encrypt({ response: true }));
+		return res.status(200).json(encrypt({ response }));
 	} catch (error) {
 		res.status(500).json({ error });
 	}

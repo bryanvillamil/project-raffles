@@ -21,9 +21,17 @@ const StatusTransaction = (props: IPropsHome) => {
 				numero_transaccion: id,
 				estado_transaccion: status,
 			})
-			.then(result => {
+			.then(() => {
 				getDataTransaction(id, status);
 			});
+	};
+
+	const saveStatus = async (id: string, status: statusTransactionEnum) => {
+		const api = new API('/api');
+		await api.post<INumeroUsado>('saveStatus', {
+			numero_transaccion: id,
+			estado_transaccion: status,
+		});
 	};
 
 	const getDataTransaction = async (
@@ -37,6 +45,13 @@ const StatusTransaction = (props: IPropsHome) => {
 				if (result.numero === null) {
 					saveNumbers(result.numero_transaccion, status);
 					return;
+				}
+				if (
+					result.estado_transaccion ===
+						statusTransactionEnum.PENDING &&
+					status === statusTransactionEnum.APPROVED
+				) {
+					saveStatus(id, status);
 				}
 				setNumberAssigned(result.numero);
 			});

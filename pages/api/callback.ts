@@ -38,6 +38,7 @@ export default async function callBack(
 					'cantidad',
 					'cliente_id',
 					'estado_transaccion',
+					'numero',
 				])
 				.where(
 					'numero_transaccion',
@@ -45,6 +46,7 @@ export default async function callBack(
 					body.data.transaction.reference,
 				)
 				.execute();
+
 			if (dataTransaction.length !== 0) {
 				if (
 					![statusTransactionEnum.PENDING].includes(
@@ -84,6 +86,21 @@ export default async function callBack(
 					body.data.transaction.status !==
 					statusTransactionEnum.APPROVED
 				) {
+					await db
+						.updateTable('numeros_usados')
+						.set({
+							estado_transaccion: body.data.transaction.status,
+						})
+						.where(
+							'numero_transaccion',
+							'=',
+							body.data.transaction.reference,
+						)
+						.execute();
+					res.status(200).json({ message: 'success' });
+					return;
+				}
+				if (dataTransaction[0].numero !== '') {
 					await db
 						.updateTable('numeros_usados')
 						.set({

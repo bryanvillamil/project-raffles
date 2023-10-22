@@ -15,6 +15,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import styles from './home.module.scss';
+import Button from '@/components/atoms/button/button';
 
 const Home = ({
 	marca,
@@ -69,16 +70,16 @@ const Home = ({
 			number: numberToValid,
 		}).then(result => {
 			if (numbersSelected.includes(numberToValid) === false) {
-				setNumbersSelected([...numbersSelected, numberToValid]);
 				if (!result.response) {
-					setValidNumberMessage('El número ya fue seleccionado');
+					setValidNumberMessage('El número ya fue comprado');
+					setIsValidNumber(!result.response);
 				} else {
 					setValidNumberMessage('');
+					setNumbersSelected([...numbersSelected, numberToValid]);
 				}
-				setIsValidNumber(result.response);
 				event.target.numberToValid.value = '';
 			} else {
-				setIsValidNumber(result.response);
+				setIsValidNumber(!result.response);
 				setValidNumberMessage('El número ya fue seleccionado');
 			}
 			setLoadingValidNumber(false);
@@ -88,6 +89,13 @@ const Home = ({
 	const getNumbers = async (cantNumbers: number) => {
 		setLoading(true);
 		setStore(cantNumbers, nameStore.NUMBERS, true);
+		router.push('/finalizar-compra');
+		setLoading(false);
+	};
+
+	const setNumbers = async (cantNumbers: number[]) => {
+		setLoading(true);
+		setStore(cantNumbers, nameStore.NUMBERS_SELECTED, true);
 		router.push('/finalizar-compra');
 		setLoading(false);
 	};
@@ -105,7 +113,6 @@ const Home = ({
 		setStore({ marca, precio, idSorteo }, nameStore.DATA_RIFA, true);
 	}, []);
 
-	// Tomar las img del contentful
 	return (
 		<Layout logo={logo} facebook={facebook} instagram={instagram}>
 			<div className={styles.container}>
@@ -190,6 +197,7 @@ const Home = ({
 									min={1}
 									max={9999}
 									id='numberToValid'
+									required
 								/>
 								{loadingValidNumber ? (
 									<>
@@ -205,17 +213,44 @@ const Home = ({
 									</>
 								)}
 							</div>
-							<button>valid</button>
+							<Button
+								type='Button'
+								typeButton='submit'
+								label='Validar'
+							/>
 						</form>
 					</div>
 					<div className={styles.selectNumber_container_number}>
 						<p>Números seleccionados</p>
 						<div className={styles.numbers}>
 							{numbersSelected?.map(number => (
-								<span className={styles.number} key={number}>
-									{number}
-								</span>
+								<div key={number} className={styles.number}>
+									<span>{number}</span>
+									<button
+										className={styles.delete}
+										onClick={() => {
+											setNumbersSelected(
+												numbersSelected.filter(
+													n => n !== number,
+												),
+											);
+										}}>
+										x
+									</button>
+								</div>
 							))}
+						</div>
+						<div className={styles.selectNumber_container_button}>
+							<Button
+								// url='/finalizar-compra'
+								type='Button'
+								typeButton='button'
+								label='Ir a pagar'
+								disable={numbersSelected.length < 2}
+								onClick={() => {
+									setNumbers(numbersSelected);
+								}}
+							/>
 						</div>
 					</div>
 				</div>

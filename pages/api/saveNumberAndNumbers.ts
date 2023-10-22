@@ -35,6 +35,7 @@ export default async function getNumbers(
 				fecha_compra: new Date(),
 				numero_transaccion: body.numero_transaccion,
 				cantidad: body.cantidad,
+				numero: JSON.stringify(body.numbers) ?? '',
 			})
 			.execute();
 
